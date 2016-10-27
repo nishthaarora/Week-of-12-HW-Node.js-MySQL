@@ -1,0 +1,26 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "app like amazon for customers to place order, managers to view inventory and executives to know the profits from each department.",
+  "main": "BamazonCustomer.js",
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "console.table": "^0.7.0",
+    "inquirer": "^1.2.2",
+    "mysql": "^2.11.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/nishthaarora/Week-of-12-HW-Node.js-MySQL.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nishthaarora/Week-of-12-HW-Node.js-MySQL/issues"
+  },
+  "homepage": "https://github.com/nishthaarora/Week-of-12-HW-Node.js-MySQL#readme"
+}
