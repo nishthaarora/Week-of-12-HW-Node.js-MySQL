@@ -34,4 +34,4 @@ This app has 2 usages
 		They can add new departments to start monitoring the profits of that department
 
 ### Link for the app
-[app screenshots]()
+[app screenshots](https://github.com/nishthaarora/Week-of-12-HW-Node.js-MySQL/tree/master/appScreenshots)
