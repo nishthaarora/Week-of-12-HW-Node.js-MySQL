@@ -1,8 +1,10 @@
+// requiring node packages
 var mysql = require('mysql');
 var inquirer = require('inquirer');
 var Promise = require('bluebird');
 require('console.table');
 
+// making connections
 var connection = mysql.createConnection({
 	host: 'localhost',
 	port: 3306,
@@ -15,6 +17,11 @@ connection.connect(function(err) {
 	if (err) throw err;
 });
 
+
+/* this is the function to display the table everytime manager updated anything in the table. This function is called at all the places
+where there is an addition or a change to the inventory. Like updating itmID, Price, Department Name, product Name, stock quantity.
+*/
+
 function displayData() {
 
 	console.log('Here is the udated data');
@@ -26,6 +33,9 @@ function displayData() {
 
 }
 
+/* this function is displaying the itemID's existing in the products table so that if a manager wants to update anything this will show itemID's
+	as a choice and not an inout field.
+*/
 function validateItemId() {
 	return new Promise(function(resolve, reject) {
 		var choice = [];
@@ -41,6 +51,8 @@ function validateItemId() {
 }
 
 
+/* this function runs when user selects Add to Inventory in displayMenuOptions() function. This gives a manager an ability to change an itemID
+ for the existing items. */
 function updateItemId() {
 	validateItemId().then(function(choice) {
 		inquirer.prompt([{
@@ -65,6 +77,8 @@ function updateItemId() {
 }
 
 
+/* this function runs when user selects Add to Inventory in displayMenuOptions() function. This gives a manager an ability to change a product name
+ for the existing products. */
 function updateProductName() {
 
 	validateItemId().then(function(choice) {
@@ -90,6 +104,11 @@ function updateProductName() {
 		})
 	})
 }
+
+
+/* this function runs when user selects Add to Inventory in displayMenuOptions() function. This gives a manager an ability to change a department
+name for the existing departments. If the  department doesnot exist, only executives has the ability to add new departments. Manager can only
+change existing departments */
 
 function updateDepartmentName() {
 	var deptChoice = [];
@@ -125,6 +144,9 @@ function updateDepartmentName() {
 	})
 }
 
+
+/* this function runs when user selects Add to Inventory in displayMenuOptions() function. This gives a manager an ability to change a price
+ for the existing product. */
 function updatePrice() {
 
 	validateItemId().then(function(choice) {
@@ -155,6 +177,9 @@ function updatePrice() {
 	})
 }
 
+
+/* this function runs when user selects Add to Inventory in displayMenuOptions() function. This gives a manager an ability to change an stock
+quantity for the existing product. */
 function updateStockQuantity() {
 	validateItemId().then(function(choice) {
 		inquirer.prompt([{
@@ -184,6 +209,8 @@ function updateStockQuantity() {
 }
 
 
+/* this is the main function which dislays all the options that the manager can do like view products for sale, low inventory, add to inventory,
+or add new product */
 function displayMenuOptions() {
 
 	inquirer.prompt({

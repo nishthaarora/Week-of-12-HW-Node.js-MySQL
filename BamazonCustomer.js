@@ -1,9 +1,12 @@
+
+// requiring node modules
 var mysql = require('mysql');
 var inquirer = require('inquirer');
+// it is an npm package for promise
 var Promise = require('bluebird');
 require('console.table');
 
-
+// creating a connection to the server
 var connection = mysql.createConnection({
 	host: 'localhost',
 	port: 3306,
@@ -17,7 +20,7 @@ connection.connect(function(err) {
 });
 
 
-// display items of the table in terminal
+// displaying all the items that the customer can buy which are available in products table
 function getResponse() {
 
 	return new Promise(function(resolve, reject) {
@@ -33,6 +36,9 @@ function getResponse() {
 	});
 }
 
+
+// prompts for the user get the order placed and once the order is placed it would be updated in the products table for the manager
+// to see the remaining stock quantity in the inventory. Set timeout displaying the message that the order is placed and table is updated.
 function processUserOrder() {
 
 	inquirer.prompt([{
@@ -82,6 +88,12 @@ function processUserOrder() {
 	})
 }
 
+// this function is updating the departments table
+/*  @param {
+			totalCost: is the total cost of the orde that the customer had placed.
+			queryResponse is the reponse that e get from the products table when the customer places an order. It returns an object from the
+			table that matched with that order item ID.
+}*/
 
 function updateDepartments(totalCost, queryResponse) {
 	connection.query('SELECT * FROM departments', function(err, res) {
@@ -104,6 +116,7 @@ function updateDepartments(totalCost, queryResponse) {
 			})
 	}
 
+// this is a promise for running the functions so that the data is displayed one after the other
 	getResponse()
 		.then( processUserOrder )
 		.catch( function (err) {

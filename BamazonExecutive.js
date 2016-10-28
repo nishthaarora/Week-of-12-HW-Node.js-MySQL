@@ -1,8 +1,9 @@
+// requiring node packages
 var mysql = require('mysql');
 var inquirer = require('inquirer');
 require('console.table');
 
-
+// making server connection
 var connection = mysql.createConnection({
 	host: 'localhost',
 	port: 3306,
@@ -16,6 +17,7 @@ connection.connect(function(err) {
 });
 
 
+// getting all the objects from the departments table in a variable res
 function getResponseData() {
 	connection.query('SELECT * FROM departments', function(err, res) {
 		if (err) throw err;
@@ -23,6 +25,11 @@ function getResponseData() {
 	})
 }
 
+
+/* prominting the managers with different views. In this manager can view department wise sales and their profits according to the
+ purchases made by the customer in the BamazonCustomer.js file. In this function totalProfits column is created on the fly
+ manager can also add new departments into the table by select "enter new dept option" to track their sales.
+*/
 function executiveInputs(res) {
 	inquirer.prompt({
 		name: 'deptSales',
